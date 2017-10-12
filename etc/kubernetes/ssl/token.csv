@@ -1,0 +1,1 @@
+${KUBE_BOOTSTRAP_TOKEN},kubelet-bootstrap,10001,"system:kubelet-bootstrap"
