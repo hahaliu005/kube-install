@@ -6,9 +6,9 @@
 * At the very first, You need to init server follow the article 'new host machine init'
 
 ## For every master and node
-* Download and install kubernetes binaries, you can find every release at [github](https://github.com/kubernetes/kubernetes/releases), now the newest version is 1.9.4
+* Download and install kubernetes binaries, you can find every release at [github](https://github.com/kubernetes/kubernetes/releases), now the newest version is 1.7.5
 ```
-wget https://dl.k8s.io/v1.9.4/kubernetes-server-linux-amd64.tar.gz && \
+wget https://dl.k8s.io/v1.7.5/kubernetes-server-linux-amd64.tar.gz && \
 tar zxvf kubernetes-server-linux-amd64.tar.gz && \
 tar zxvf kubernetes/kubernetes-src.tar.gz -C kubernetes && \
 cp kubernetes/server/bin/{kube-apiserver,kube-controller-manager,kube-scheduler,kubectl,kubelet,kube-proxy} /usr/local/bin/
