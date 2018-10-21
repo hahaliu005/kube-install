@@ -16,7 +16,7 @@ ExecStart=/usr/bin/flanneld \
   -etcd-endpoints=${KUBE_ETCD_SERVERS} \
   -etcd-prefix=${KUBE_FLANNEL_ETCD_PREFIX} \
   -iface=${KUBE_FLANNEL_IFACE}
-ExecStartPost=/usr/local/bin/mk-docker-opts.sh -k DOCKER_NETWORK_OPTIONS -d /run/flannel/docker
+ExecStartPost=/usr/bin/mk-docker-opts.sh -k DOCKER_NETWORK_OPTIONS -d /run/flannel/docker
 Restart=on-failure
 
 [Install]
