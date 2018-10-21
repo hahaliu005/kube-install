@@ -6,13 +6,13 @@
 * At the very first, You need to init server follow the article 'new host machine init'
 
 ## For every master and node
-* Download and install kubernetes binaries, you can find every release at [github](https://github.com/kubernetes/kubernetes/releases), now the newest version is 1.9.6
+* Download and install kubernetes binaries, you can find every release at [github](https://github.com/kubernetes/kubernetes/releases), now the newest version is 1.12.1
 ```
-wget https://dl.k8s.io/v1.9.6/kubernetes-server-linux-amd64.tar.gz && \
+wget https://dl.k8s.io/v1.12.1/kubernetes-server-linux-amd64.tar.gz && \
 tar zxvf kubernetes-server-linux-amd64.tar.gz && \
-tar zxvf kubernetes/kubernetes-src.tar.gz -C kubernetes && \
-cp kubernetes/server/bin/{kube-apiserver,kube-controller-manager,kube-scheduler,kubectl,kubelet,kube-proxy} /usr/local/bin/
+cp kubernetes/server/bin/{kube-apiserver,kube-controller-manager,kube-scheduler,kubectl,kubelet,kube-proxy} /usr/bin/
 ```
+
 * Make every possible directory, if don't create , may cause error
 ```
 mkdir -p /etc/kubernetes/conf
@@ -23,10 +23,15 @@ mkdir -p /var/lib/docker
 mkdir -p /var/lib/kubelet
 mkdir -p /var/lib/kube-proxy
 mkdir -p /var/lib/etcd
+
+* Clone config file
 ```
+git clone https://github.com/hahaliu005/kube-install.git
+```
+
 * Config etc/kubernetes/conf/common.conf
 ```
-cp etc/kubernetes/conf/common.conf /etc/kubernetes/conf/common.conf
+cp kube-install/etc/kubernetes/conf/common.conf /etc/kubernetes/conf/common.conf
 ```
 * Export config variables to shell, Then you can use these variables in command line
 ```
