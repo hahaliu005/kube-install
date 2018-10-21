@@ -7,7 +7,7 @@ Requires=docker.service
 [Service]
 WorkingDirectory=/var/lib/kubelet
 EnvironmentFile=/etc/kubernetes/conf/common.conf
-ExecStart=/usr/local/bin/kubelet \
+ExecStart=/usr/bin/kubelet \
   --address=${KUBE_NODE_IP} \
   --hostname-override=${KUBE_NODE_NAME} \
   --anonymous-auth=false \

@@ -5,7 +5,7 @@ After=network.target
 
 [Service]
 EnvironmentFile=/etc/kubernetes/conf/common.conf
-ExecStart=/usr/local/bin/kube-apiserver \
+ExecStart=/usr/bin/kube-apiserver \
   --admission-control=NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,ResourceQuota \
   --advertise-address=${KUBE_MASTER_IP} \
   --bind-address=${KUBE_MASTER_IP} \

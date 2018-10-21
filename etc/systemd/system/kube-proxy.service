@@ -6,7 +6,7 @@ After=network.target
 [Service]
 WorkingDirectory=/var/lib/kube-proxy
 EnvironmentFile=/etc/kubernetes/conf/common.conf
-ExecStart=/usr/local/bin/kube-proxy \
+ExecStart=/usr/bin/kube-proxy \
   --bind-address=${KUBE_NODE_IP} \
   --hostname-override=${KUBE_NODE_NAME} \
   --cluster-cidr=${KUBE_SERVICE_CIDR} \
