@@ -1,4 +1,8 @@
 ```
+cd /opt/k8s
+```
+
+```
 for node_name in ${NODE_NAMES[@]}
   do
     echo ">>> ${node_name}"

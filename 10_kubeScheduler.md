@@ -1,4 +1,8 @@
 ```
+cd /opt/k8s
+```
+
+```
 cat > kube-scheduler-csr.json <<EOF
 {
     "CN": "system:kube-scheduler",

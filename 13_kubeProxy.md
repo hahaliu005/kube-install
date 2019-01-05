@@ -1,4 +1,8 @@
 ```
+cd /opt/k8s
+```
+
+```
 cat > kube-proxy-csr.json <<EOF
 {
   "CN": "system:kube-proxy",

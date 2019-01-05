@@ -1,4 +1,8 @@
 ```
+cd /opt/k8s
+```
+
+```
 cat > flanneld-csr.json <<EOF
 {
   "CN": "flanneld",

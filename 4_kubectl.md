@@ -1,4 +1,8 @@
 ```
+cd /opt/k8s
+```
+
+```
 cat > admin-csr.json <<EOF
 {
   "CN": "admin",

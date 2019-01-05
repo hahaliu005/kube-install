@@ -1,4 +1,8 @@
 ```
+cd /opt/k8s
+```
+
+```
 cat > kubernetes-csr.json <<EOF
 {
   "CN": "kubernetes",

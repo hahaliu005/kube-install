@@ -1,4 +1,8 @@
 ```
+cd /opt/k8s
+```
+
+```
 cat > docker.service <<"EOF"
 [Unit]
 Description=Docker Application Container Engine

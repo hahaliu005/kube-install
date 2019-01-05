@@ -1,4 +1,8 @@
 ```
+cd /opt/k8s
+```
+
+```
 wget https://dl.k8s.io/v1.12.4/kubernetes-server-linux-amd64.tar.gz && \
 tar zxvf kubernetes-server-linux-amd64.tar.gz && \
 tar zxvf kubernetes/kubernetes-src.tar.gz -C kubernetes

@@ -1,4 +1,8 @@
 ```
+cd /opt/k8s
+```
+
+```
 cat > kube-controller-manager-csr.json <<EOF
 {
     "CN": "system:kube-controller-manager",
@@ -101,7 +105,6 @@ ExecStart=/opt/k8s/bin/kube-controller-manager \\
   --logtostderr=false \\
   --log-dir=/var/log/kubernetes \\
   --v=2
-Restart=on
 Restart=on-failure
 RestartSec=5
 User=root

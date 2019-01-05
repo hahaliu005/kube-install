@@ -38,7 +38,8 @@ ssh-copy-id root@kube-node1
 ```
 
 ```
-echo 'PATH=/opt/k8s/bin:$PATH' >>~/.bashrc
+echo 'PATH=/opt/k8s/bin:$PATH' >>~/.bashrc &&
+source ~/.bashrc
 ```
 
 ```

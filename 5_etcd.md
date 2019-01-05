@@ -1,4 +1,8 @@
 ```
+cd /opt/k8s
+```
+
+```
 cat > etcd-csr.json <<EOF
 {
   "CN": "etcd",

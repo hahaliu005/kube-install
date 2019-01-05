@@ -1,4 +1,8 @@
 ```
+cd /opt/k8s
+```
+
+```
 cat > haproxy.cfg <<EOF
 global
     log /dev/log    local0
