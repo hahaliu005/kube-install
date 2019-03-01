@@ -108,11 +108,11 @@ bash ./check-config.sh
 
 # Config environment.sh
 ```
-source environment.sh
+source ./environment.sh
 for node_ip in ${NODE_IPS[@]}
 do
   echo ">>> ${node_ip}"
-  scp environment.sh root@${node_ip}:/opt/k8s/bin/
+  scp -P ${SSH_PORT} environment.sh root@${node_ip}:/opt/k8s/bin/
 done
 ```
 

@@ -49,3 +49,6 @@ export CLUSTER_DNS_DOMAIN="cluster.local."
 
 # 将二进制目录 /opt/k8s/bin 加到 PATH 中
 export PATH=/opt/k8s/bin:$PATH
+
+# ssh or scp connection port
+export SSH_PORT=22

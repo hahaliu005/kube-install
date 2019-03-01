@@ -12,7 +12,7 @@ tar zxvf kubernetes/kubernetes-src.tar.gz -C kubernetes
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    scp kubernetes/server/bin/{kube-apiserver,kube-controller-manager,kube-scheduler,kubectl,kubelet,kube-proxy,kubeadm} root@${node_ip}:/opt/k8s/bin/
+    scp -P ${SSH_PORT} kubernetes/server/bin/{kube-apiserver,kube-controller-manager,kube-scheduler,kubectl,kubelet,kube-proxy,kubeadm} root@${node_ip}:/opt/k8s/bin/
   done
 ```
 
@@ -25,7 +25,7 @@ tar -xvf etcd-v3.3.7-linux-amd64.tar.gz
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    scp etcd-v3.3.7-linux-amd64/etcd* root@${node_ip}:/opt/k8s/bin
+    scp -P ${SSH_PORT} etcd-v3.3.7-linux-amd64/etcd* root@${node_ip}:/opt/k8s/bin
   done
 ```
 
@@ -39,7 +39,7 @@ tar -xzvf flannel-v0.10.0-linux-amd64.tar.gz -C flannel
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    scp  flannel/{flanneld,mk-docker-opts.sh} root@${node_ip}:/opt/k8s/bin/
+    scp -P ${SSH_PORT}  flannel/{flanneld,mk-docker-opts.sh} root@${node_ip}:/opt/k8s/bin/
   done
 ```
 
@@ -52,7 +52,7 @@ tar -xvf docker-18.06.1-ce.tgz
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    scp docker/docker*  root@${node_ip}:/opt/k8s/bin/
+    scp -P ${SSH_PORT} docker/docker*  root@${node_ip}:/opt/k8s/bin/
   done
 ```
 

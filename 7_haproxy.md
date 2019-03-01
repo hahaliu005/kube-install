@@ -36,7 +36,7 @@ EOF
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    scp haproxy.cfg root@${node_ip}:/etc/haproxy
+    scp -P ${SSH_PORT} haproxy.cfg root@${node_ip}:/etc/haproxy
   done
 ```
 
@@ -44,7 +44,7 @@ for node_ip in ${NODE_IPS[@]}
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    ssh root@${node_ip} "systemctl enable haproxy && systemctl restart haproxy"
+    ssh -p ${SSH_PORT} root@${node_ip} "systemctl enable haproxy && systemctl restart haproxy"
   done
 ```
 
@@ -52,7 +52,7 @@ for node_ip in ${NODE_IPS[@]}
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    ssh root@${node_ip} "systemctl status haproxy|grep Active"
+    ssh -p ${SSH_PORT} root@${node_ip} "systemctl status haproxy|grep Active"
   done
 ```
 
@@ -60,6 +60,6 @@ for node_ip in ${NODE_IPS[@]}
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    ssh root@${node_ip} "netstat -lnpt|grep haproxy"
+    ssh -p ${SSH_PORT} root@${node_ip} "netstat -lnpt|grep haproxy"
   done
 ```

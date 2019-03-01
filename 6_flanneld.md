@@ -36,7 +36,7 @@ ls flanneld*pem
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    scp flanneld*.pem root@${node_ip}:/etc/flanneld/cert
+    scp -P ${SSH_PORT} flanneld*.pem root@${node_ip}:/etc/flanneld/cert
   done
 ```
 
@@ -50,7 +50,7 @@ etcdctl \
 ```
 
 ```
-export IFACE=eth1
+export IFACE=${VIP_IF}
 cat > flanneld.service << EOF
 [Unit]
 Description=Flanneld overlay address etcd agent
@@ -82,7 +82,7 @@ EOF
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    scp flanneld.service root@${node_ip}:/etc/systemd/system/
+    scp -P ${SSH_PORT} flanneld.service root@${node_ip}:/etc/systemd/system/
   done
 ```
 
@@ -90,7 +90,7 @@ for node_ip in ${NODE_IPS[@]}
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    ssh root@${node_ip} "systemctl daemon-reload && systemctl enable flanneld && systemctl restart flanneld"
+    ssh -p ${SSH_PORT} root@${node_ip} "systemctl daemon-reload && systemctl enable flanneld && systemctl restart flanneld"
   done
 ```
 
@@ -98,7 +98,7 @@ for node_ip in ${NODE_IPS[@]}
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    ssh root@${node_ip} "systemctl status flanneld|grep Active"
+    ssh -p ${SSH_PORT} root@${node_ip} "systemctl status flanneld|grep Active"
   done
 ```
 
@@ -124,6 +124,6 @@ etcdctl \
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    ssh ${node_ip} "/usr/sbin/ip addr show flannel.1|grep -w inet"
+    ssh -p ${SSH_PORT} ${node_ip} "/usr/sbin/ip addr show flannel.1|grep -w inet"
   done
 ```

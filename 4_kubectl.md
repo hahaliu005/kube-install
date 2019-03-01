@@ -61,6 +61,6 @@ kubectl config use-context kubernetes --kubeconfig=kubectl.kubeconfig
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    scp kubectl.kubeconfig root@${node_ip}:~/.kube/config
+    scp -P ${SSH_PORT} kubectl.kubeconfig root@${node_ip}:~/.kube/config
   done
 ```

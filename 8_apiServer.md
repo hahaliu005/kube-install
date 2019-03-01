@@ -48,7 +48,7 @@ ls kubernetes*pem
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    scp kubernetes*.pem root@${node_ip}:/etc/kubernetes/cert/
+    scp -P ${SSH_PORT} kubernetes*.pem root@${node_ip}:/etc/kubernetes/cert/
   done
 ```
 
@@ -72,7 +72,7 @@ EOF
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    scp encryption-config.yaml root@${node_ip}:/etc/kubernetes/
+    scp -P ${SSH_PORT} encryption-config.yaml root@${node_ip}:/etc/kubernetes/
   done
 ```
 
@@ -141,7 +141,7 @@ ls kube-apiserver*.service
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    scp kube-apiserver-${node_ip}.service root@${node_ip}:/etc/systemd/system/kube-apiserver.service
+    scp -P ${SSH_PORT} kube-apiserver-${node_ip}.service root@${node_ip}:/etc/systemd/system/kube-apiserver.service
   done
 ```
 
@@ -149,7 +149,7 @@ for node_ip in ${NODE_IPS[@]}
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    ssh root@${node_ip} "systemctl daemon-reload && systemctl enable kube-apiserver && systemctl restart kube-apiserver"
+    ssh -p ${SSH_PORT} root@${node_ip} "systemctl daemon-reload && systemctl enable kube-apiserver && systemctl restart kube-apiserver"
   done
 ```
 
@@ -157,7 +157,7 @@ for node_ip in ${NODE_IPS[@]}
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    ssh root@${node_ip} "systemctl status kube-apiserver |grep 'Active:'"
+    ssh -p ${SSH_PORT} root@${node_ip} "systemctl status kube-apiserver |grep 'Active:'"
   done
 ```
 

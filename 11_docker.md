@@ -30,7 +30,7 @@ EOF
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    scp docker.service root@${node_ip}:/etc/systemd/system/
+    scp -P ${SSH_PORT} docker.service root@${node_ip}:/etc/systemd/system/
   done
 ```
 
@@ -38,7 +38,7 @@ for node_ip in ${NODE_IPS[@]}
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    ssh root@${node_ip} "systemctl daemon-reload && systemctl enable docker && systemctl restart docker"
+    ssh -p ${SSH_PORT} root@${node_ip} "systemctl daemon-reload && systemctl enable docker && systemctl restart docker"
   done
 ```
 
@@ -46,7 +46,7 @@ for node_ip in ${NODE_IPS[@]}
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    ssh root@${node_ip} "systemctl status docker|grep Active"
+    ssh -p ${SSH_PORT} root@${node_ip} "systemctl status docker|grep Active"
   done
 ```
 
@@ -54,6 +54,6 @@ for node_ip in ${NODE_IPS[@]}
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    ssh root@${node_ip} "/usr/sbin/ip addr show flannel.1 && /usr/sbin/ip addr show docker0"
+    ssh -p ${SSH_PORT} root@${node_ip} "/usr/sbin/ip addr show flannel.1 && /usr/sbin/ip addr show docker0"
   done
 ```

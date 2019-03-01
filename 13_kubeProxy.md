@@ -55,7 +55,7 @@ kubectl config use-context default --kubeconfig=kube-proxy.kubeconfig
 for node_name in ${NODE_NAMES[@]}
   do
     echo ">>> ${node_name}"
-    scp kube-proxy.kubeconfig root@${node_name}:/etc/kubernetes/
+    scp -P ${SSH_PORT} kube-proxy.kubeconfig root@${node_name}:/etc/kubernetes/
   done
 ```
 
@@ -79,7 +79,7 @@ for (( i=0; i < 3; i++ ))
   do 
     echo ">>> ${NODE_NAMES[i]}"
     sed -e "s/##NODE_NAME##/${NODE_NAMES[i]}/" -e "s/##NODE_IP##/${NODE_IPS[i]}/" kube-proxy.config.yaml.template > kube-proxy-${NODE_NAMES[i]}.config.yaml
-    scp kube-proxy-${NODE_NAMES[i]}.config.yaml root@${NODE_NAMES[i]}:/etc/kubernetes/kube-proxy.config.yaml
+    scp -P ${SSH_PORT} kube-proxy-${NODE_NAMES[i]}.config.yaml root@${NODE_NAMES[i]}:/etc/kubernetes/kube-proxy.config.yaml
   done
 ```
 
@@ -111,7 +111,7 @@ EOF
 for node_name in ${NODE_NAMES[@]}
   do 
     echo ">>> ${node_name}"
-    scp kube-proxy.service root@${node_name}:/etc/systemd/system/
+    scp -P ${SSH_PORT} kube-proxy.service root@${node_name}:/etc/systemd/system/
   done
 ```
 
@@ -119,7 +119,7 @@ for node_name in ${NODE_NAMES[@]}
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    ssh root@${node_ip} "systemctl daemon-reload && systemctl enable kube-proxy && systemctl restart kube-proxy"
+    ssh -p ${SSH_PORT} root@${node_ip} "systemctl daemon-reload && systemctl enable kube-proxy && systemctl restart kube-proxy"
   done
 ```
 
@@ -127,7 +127,7 @@ for node_ip in ${NODE_IPS[@]}
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    ssh root@${node_ip} "systemctl status kube-proxy|grep Active"
+    ssh -p ${SSH_PORT} root@${node_ip} "systemctl status kube-proxy|grep Active"
   done
 ```
 
@@ -135,6 +135,6 @@ for node_ip in ${NODE_IPS[@]}
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    ssh root@${node_ip} "/usr/sbin/ipvsadm -ln"
+    ssh -p ${SSH_PORT} root@${node_ip} "/usr/sbin/ipvsadm -ln"
   done
 ```

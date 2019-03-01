@@ -62,7 +62,7 @@ kubectl config use-context system:kube-scheduler --kubeconfig=kube-scheduler.kub
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    scp kube-scheduler.kubeconfig root@${node_ip}:/etc/kubernetes/
+    scp -P ${SSH_PORT} kube-scheduler.kubeconfig root@${node_ip}:/etc/kubernetes/
   done
 ```
 
@@ -94,7 +94,7 @@ EOF
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    scp kube-scheduler.service root@${node_ip}:/etc/systemd/system/
+    scp -P ${SSH_PORT} kube-scheduler.service root@${node_ip}:/etc/systemd/system/
   done
 ```
 
@@ -102,7 +102,7 @@ for node_ip in ${NODE_IPS[@]}
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    ssh root@${node_ip} "systemctl daemon-reload && systemctl enable kube-scheduler && systemctl restart kube-scheduler"
+    ssh -p ${SSH_PORT} root@${node_ip} "systemctl daemon-reload && systemctl enable kube-scheduler && systemctl restart kube-scheduler"
   done
 ```
 
@@ -110,7 +110,7 @@ for node_ip in ${NODE_IPS[@]}
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    ssh root@${node_ip} "systemctl status kube-scheduler|grep Active"
+    ssh -p ${SSH_PORT} root@${node_ip} "systemctl status kube-scheduler|grep Active"
   done
 ```
 

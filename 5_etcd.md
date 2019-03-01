@@ -41,7 +41,7 @@ ls etcd*
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    scp etcd*.pem root@${node_ip}:/etc/etcd/cert/
+    scp -P ${SSH_PORT} etcd*.pem root@${node_ip}:/etc/etcd/cert/
   done
 ```
 
@@ -97,7 +97,7 @@ ls *.service
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    scp etcd-${node_ip}.service root@${node_ip}:/etc/systemd/system/etcd.service
+    scp -P ${SSH_PORT} etcd-${node_ip}.service root@${node_ip}:/etc/systemd/system/etcd.service
   done
 ```
 
@@ -105,7 +105,7 @@ for node_ip in ${NODE_IPS[@]}
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    ssh root@${node_ip} "systemctl daemon-reload && systemctl enable etcd && systemctl restart etcd &"
+    ssh -p ${SSH_PORT} root@${node_ip} "systemctl daemon-reload && systemctl enable etcd && systemctl restart etcd &"
   done
 ```
 
@@ -113,7 +113,7 @@ for node_ip in ${NODE_IPS[@]}
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    ssh root@${node_ip} "systemctl status etcd|grep Active"
+    ssh -p ${SSH_PORT} root@${node_ip} "systemctl status etcd|grep Active"
   done
 ```
 

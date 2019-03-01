@@ -41,7 +41,7 @@ ls kube-controller-manager*.pem
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    scp kube-controller-manager*.pem root@${node_ip}:/etc/kubernetes/cert/
+    scp -P ${SSH_PORT} kube-controller-manager*.pem root@${node_ip}:/etc/kubernetes/cert/
   done
 ```
 
@@ -70,7 +70,7 @@ kubectl config use-context system:kube-controller-manager --kubeconfig=kube-cont
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    scp kube-controller-manager.kubeconfig root@${node_ip}:/etc/kubernetes/
+    scp -P ${SSH_PORT} kube-controller-manager.kubeconfig root@${node_ip}:/etc/kubernetes/
   done
 ```
 
@@ -118,7 +118,7 @@ EOF
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    scp kube-controller-manager.service root@${node_ip}:/etc/systemd/system/
+    scp -P ${SSH_PORT} kube-controller-manager.service root@${node_ip}:/etc/systemd/system/
   done
 ```
 
@@ -126,7 +126,7 @@ for node_ip in ${NODE_IPS[@]}
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    ssh root@${node_ip} "systemctl daemon-reload && systemctl enable kube-controller-manager && systemctl restart kube-controller-manager"
+    ssh -p ${SSH_PORT} root@${node_ip} "systemctl daemon-reload && systemctl enable kube-controller-manager && systemctl restart kube-controller-manager"
   done
 ```
 
@@ -134,7 +134,7 @@ for node_ip in ${NODE_IPS[@]}
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    ssh root@${node_ip} "systemctl status kube-controller-manager|grep Active"
+    ssh -p ${SSH_PORT} root@${node_ip} "systemctl status kube-controller-manager|grep Active"
   done
 ```
 

@@ -48,7 +48,7 @@ kubectl get secrets  -n kube-system
 for node_name in ${NODE_NAMES[@]}
   do
     echo ">>> ${node_name}"
-    scp kubelet-bootstrap-${node_name}.kubeconfig root@${node_name}:/etc/kubernetes/kubelet-bootstrap.kubeconfig
+    scp -P ${SSH_PORT} kubelet-bootstrap-${node_name}.kubeconfig root@${node_name}:/etc/kubernetes/kubelet-bootstrap.kubeconfig
   done
 ```
 
@@ -97,7 +97,7 @@ for node_ip in ${NODE_IPS[@]}
   do 
     echo ">>> ${node_ip}"
     sed -e "s/##NODE_IP##/${node_ip}/" kubelet.config.json.template > kubelet.config-${node_ip}.json
-    scp kubelet.config-${node_ip}.json root@${node_ip}:/etc/kubernetes/kubelet.config.json
+    scp -P ${SSH_PORT} kubelet.config-${node_ip}.json root@${node_ip}:/etc/kubernetes/kubelet.config.json
   done
 ```
 
@@ -136,7 +136,7 @@ for node_name in ${NODE_NAMES[@]}
   do 
     echo ">>> ${node_name}"
     sed -e "s/##NODE_NAME##/${node_name}/" kubelet.service.template > kubelet-${node_name}.service
-    scp kubelet-${node_name}.service root@${node_name}:/etc/systemd/system/kubelet.service
+    scp -P ${SSH_PORT} kubelet-${node_name}.service root@${node_name}:/etc/systemd/system/kubelet.service
   done
 ```
 
@@ -148,7 +148,7 @@ kubectl create clusterrolebinding kubelet-bootstrap --clusterrole=system:node-bo
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    ssh root@${node_ip} "systemctl daemon-reload && systemctl enable kubelet && systemctl restart kubelet"
+    ssh -p ${SSH_PORT} root@${node_ip} "systemctl daemon-reload && systemctl enable kubelet && systemctl restart kubelet"
   done
 ```
 

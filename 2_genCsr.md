@@ -63,6 +63,6 @@ ls ca*
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    scp ca*.pem ca-config.json root@${node_ip}:/etc/kubernetes/cert
+    scp -P ${SSH_PORT} ca*.pem ca-config.json root@${node_ip}:/etc/kubernetes/cert
   done
 ```
