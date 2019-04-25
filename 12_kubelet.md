@@ -120,6 +120,7 @@ ExecStart=/opt/k8s/bin/kubelet \\
   --pod-infra-container-image=registry.access.redhat.com/rhel7/pod-infrastructure:latest \\
   --allow-privileged=true \\
   --alsologtostderr=true \\
+  --eviction-hard imagefs.available<2%,memory.available<100Mi,nodefs.available<2%,nodefs.inodesFree<2% \\
   --logtostderr=false \\
   --log-dir=/var/log/kubernetes \\
   --v=2
